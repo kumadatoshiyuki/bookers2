@@ -9,13 +9,15 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  require 'devise/orm/active_record'
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'b7c3f05067706b12d722f595d7a298575542b8e21a614e4c230e6e09369d9da5af510ece49bebdae385e5573f90b66d6d780108c96c6ffb19af314bfe58b5b15'
-
+  config.scoped_views = true
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -46,7 +48,9 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
+
+  # email以外でので認証の場合はこれをコメントアウトを外し[:name]にする必要がある。
+  config.authentication_keys = [:name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -58,12 +62,15 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [:email]
+  # config.case_insensitive_keys = [:email]
+  config.case_insensitive_keys = [:name]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
-  # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:email]
+  # # modifying a user and when used to authenticate or find a user. Default is :email.
+  # config.strip_whitespace_keys = [:email]
+  config.strip_whitespace_keys = [:name]
+  
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the

@@ -10,6 +10,71 @@
   </head>
 
   <body>
-    <%= yield %>
+  <header class="navbar navbar-inverse">
+
+  <div class="container">
+
+  <nav>
+      <ul class="nav navbar-nav navbar-left">
+            <p class="navbar-text " style="color:white;">Bookers</p>
+      </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <!--<span>ログイン中</span>-->
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id), :method => :get do %>
+                <i class="glyphicon glyphicon-home home"> Home</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, :method => :get do %>
+                <i class="glyphicon glyphicon-user users"> Users</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to books_path, :method => :get do %>
+                <i class="glyphicon glyphicon-book books"> Books</i>
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to destroy_user_session_path, :method => :DELETE do %>
+                <i class="glyphicon glyphicon-log-out"> logout</i>
+              <% end %>
+            </li>
+
+            <% else %>
+            <!--<span>ログインしてない</span>-->
+            <li class="nav-item">
+              <%= link_to root_path, :method => :get do %>
+                <i class="glyphicon glyphicon-home"> Home</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to home_about_path, :method => :get do %>
+                <i class="glyphicon glyphicon-link"> About</i>
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, :method => :get do %>
+                <i class="glyphicon glyphicon-edit"> sign up</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, :method => :get do %>
+                <i class="glyphicon glyphicon-log-in"> login</i>
+              <% end %>
+            </li>
+        <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+      <%= render 'layouts/notifications' %>
+      <%= yield %>
+      <p class="text-right">CopyRight Infratop.inc</p>
+  </div>
   </body>
 </html>
