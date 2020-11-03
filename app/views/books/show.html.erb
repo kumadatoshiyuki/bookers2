@@ -4,6 +4,19 @@
 <!--@book_new = Book.new()-->
   <%= render 'users/kyoutu', user: @book_show.user, book: @book_new %>
   <div class="col-xs-9">
+
+    <% if !@comment.nil? %>
+      <% if @comment.errors.any? %>
+    <div style="color: red">
+      <%= @comment.errors.count %>errors prohibited this obj from being saved:<br>
+      <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <% end %>
     <h2>Book detail</h2>
     <table class="table">
   	  <tbody>
@@ -31,7 +44,7 @@
                 <% end %>
             <% end %>
           </td>
-          
+
           <td><ul class="inline-meta">
               コメント数：
             <%= @book_show.book_comments.count %>

@@ -9,7 +9,8 @@ class BooksController < ApplicationController
     @book_new = Book.new()
     @book_show = Book.find(params[:id])
     @user = User.find(current_user.id)
-    @book_comment = BookComment.new
+    @book_comment = BookComment.new()
+    
   end
 
   def new
