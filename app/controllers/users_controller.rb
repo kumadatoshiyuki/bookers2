@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @userall = User.all
     @user = User.find(current_user.id)
     @book = Book.new()
+
   end
 
 

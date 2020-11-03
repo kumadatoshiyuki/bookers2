@@ -14,14 +14,29 @@
     			<td>introduction</td>
     			<td><%= user.introduction %></td>
     		</tr>
+    		<tr>
+    			<td>follows</td>
+    			<td><%= link_to user.follower.count, get_follow_path(user) %></td>
+    		</tr>
+    		<tr>
+    			<td>followers</td>
+    			<td><%= link_to user.followed.count, get_follower_path(user) %></td>
+    		</tr>
     	</tbody>
     </table>
-
+    <% unless user == current_user %>
+      <% if current_user.following?(user) %>
+        <%= link_to 'フォロー外す', unfollow_path(user.id), class: "btn btn-success", method: :POST %>
+      <% else %>
+        <%= link_to 'フォローする', follow_path(@user.id), class: "btn btn-success", method: :POST %>
+      <% end %>
+    <% end %>
     <p>
       <%= link_to edit_user_path(user), :method => :get do %>
         <i class="fa fa-sign-out col-lg-12 btn btn-default glyphicon glyphicon-wrench"></i>
       <% end %>
     </p>
+  
       <h1>New book</h1>
       <!-- form_with部分 -->
 
