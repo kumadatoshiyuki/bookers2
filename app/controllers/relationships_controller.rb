@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-
+    before_action :authenticate_user!
     def get_follow
         @user = User.find(params[:id])
     end

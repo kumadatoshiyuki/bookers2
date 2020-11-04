@@ -13,4 +13,5 @@ post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
 post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
 get 'follow/:id' => 'relationships#get_follow', as: 'get_follow'
 get 'follower/:id' => 'relationships#get_follower', as: 'get_follower'
+get 'search' => 'searches#search'
 end

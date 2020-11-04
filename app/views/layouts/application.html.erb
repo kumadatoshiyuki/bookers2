@@ -10,80 +10,106 @@
   </head>
 
   <body>
-  <header class="navbar navbar-inverse">
-
-  <div class="container">
-
-  <nav>
-      <ul class="nav navbar-nav navbar-left">
-            <p class="navbar-text " style="color:white;">Bookers</p>
-      </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-            <!--<span>ログイン中</span>-->
-            <li class="nav-item">
-              <%= link_to user_path(current_user.id), :method => :get do %>
-                <i class="glyphicon glyphicon-home home"> Home</i>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to users_path, :method => :get do %>
-                <i class="glyphicon glyphicon-user users"> Users</i>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to books_path, :method => :get do %>
-                <i class="glyphicon glyphicon-book books"> Books</i>
-              <% end %>
-            </li>
-
-            <li class="nav-item">
-              <%= link_to destroy_user_session_path, :method => :DELETE do %>
-                <i class="glyphicon glyphicon-log-out"> logout</i>
-              <% end %>
-            </li>
-
-            <% else %>
-            <!--<span>ログインしてない</span>-->
-            <li class="nav-item">
-              <%= link_to root_path, :method => :get do %>
-                <i class="glyphicon glyphicon-home"> Home</i>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to home_about_path, :method => :get do %>
-                <i class="glyphicon glyphicon-link"> About</i>
-              <% end %>
-            </li>
-
-            <li class="nav-item">
-              <%= link_to new_user_registration_path, :method => :get do %>
-                <i class="glyphicon glyphicon-edit"> sign up</i>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to new_user_session_path, :method => :get do %>
-                <i class="glyphicon glyphicon-log-in"> login</i>
-              <% end %>
-            </li>
-        <% end %>
+    <header class="navbar navbar-inverse">
+    <div class="container">
+    <nav>
+        <ul class="nav navbar-nav navbar-left">
+              <p class="navbar-text " style="color:white;">Bookers</p>
         </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="container">
-      <%= render 'layouts/notifications' %>
-      <%= yield %>
-      <div id="container">
-      <div id="theTarget">
-        <div class="image1"></div>
-        <div class="image2"></div>
-        <div class="image3"></div>
-        <div class="image4"></div>
-        <div class="image5"></div>
+          <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+              <!--<span>ログイン中</span>-->
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id), :method => :get do %>
+                  <i class="glyphicon glyphicon-home home"> Home</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to users_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-user users"> Users</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to books_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-book books"> Books</i>
+                <% end %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, :method => :DELETE do %>
+                  <i class="glyphicon glyphicon-log-out"> logout</i>
+                <% end %>
+              </li>
+
+              <% else %>
+              <!--<span>ログインしてない</span>-->
+              <li class="nav-item">
+                <%= link_to root_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-home"> Home</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to home_about_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-link"> About</i>
+                <% end %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to new_user_registration_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-edit"> sign up</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, :method => :get do %>
+                  <i class="glyphicon glyphicon-log-in"> login</i>
+                <% end %>
+              </li>
+          <% end %>
+          </ul>
+        </nav>
       </div>
+    </header>
+    
+    
+<% if user_signed_in? %>
+<%= form_with url:search_path, method: :get, local: true do |f| %>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">必要事項を選択して検索してみて！</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbarEexample">
+			<ul class="nav navbar-nav">
+				<li class="active"><%= f.select :range, [['User', '1'], ['Book', '2']] %></li>
+				<li><%= f.select :search, [["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]] %></li>
+				<li><%= f.text_field :word %></li>
+				<li><%= f.submit "検索" %></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+   <% end %>
+    <% end %>
+
+    <div class="container">
+        <%= render 'layouts/notifications' %>
+        <%= yield %>
+        <div id="container">
+        <div id="theTarget">
+          <div class="image1"></div>
+          <div class="image2"></div>
+          <div class="image3"></div>
+          <div class="image4"></div>
+          <div class="image5"></div>
+        </div>
+      </div>
+        <p class="text-right">CopyRight Infratop.inc</p>
     </div>
-      <p class="text-right">CopyRight Infratop.inc</p>
-  </div>
   </body>
 </html>
