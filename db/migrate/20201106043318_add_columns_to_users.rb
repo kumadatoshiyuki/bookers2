@@ -1,4 +1,4 @@
-class AddintroductionTousers < ActiveRecord::Migration[5.2]
+class AddColumnsToUsers < ActiveRecord::Migration[5.2]
   def change
     add_column :users, :postcode, :integer
     add_column :users, :prefecture_code, :integer
