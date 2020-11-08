@@ -31,12 +31,31 @@
         <%= link_to 'フォローする', follow_path(@user.id), class: "btn btn-success", method: :POST %>
       <% end %>
     <% end %>
+
+    <p>
+    <% unless @user.id == current_user.id %>
+      <% if (current_user.following? @user) && (@user.following? current_user)  %>
+        <% if @isRoom == true %>
+          <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+        <% else %>
+          <%= form_for @room do |f| %>
+            <%= fields_for @UserRoom do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </p>
+
+
     <p>
       <%= link_to edit_user_path(user), :method => :get do %>
         <i class="fa fa-sign-out col-lg-12 btn btn-default glyphicon glyphicon-wrench"></i>
       <% end %>
     </p>
-  
+
       <h1>New book</h1>
       <!-- form_with部分 -->
 

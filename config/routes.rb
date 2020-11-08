@@ -16,4 +16,7 @@ post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー�
 get 'follow/:id' => 'relationships#get_follow', as: 'get_follow'
 get 'follower/:id' => 'relationships#get_follower', as: 'get_follower'
 get 'search' => 'searches#search'
+
+resources :chats, only: [:create]
+resources :rooms, only: [:create, :show]
 end

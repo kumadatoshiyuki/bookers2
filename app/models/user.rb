@@ -11,6 +11,9 @@ has_many :follower, class_name: "Relationship", foreign_key: "follower_id", depe
 has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
 has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
 has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
+has_many :chats, dependent: :destroy
+has_many :user_rooms, dependent: :destroy
+
 # ユーザーをフォローする
 def follow(user_id)
   follower.create(followed_id: user_id)
@@ -59,8 +62,7 @@ validates :introduction, length: { maximum: 50 }
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
-
-
+  
 
 
 end
