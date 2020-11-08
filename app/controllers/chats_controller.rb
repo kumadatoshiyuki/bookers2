@@ -10,9 +10,12 @@ class ChatsController < ApplicationController
 
     # 　チャットの一覧のためのデータ取得
     # @room = Room.find(params[:chat][:room_id])
-    room_id = @chat.room_id 
-    @room = Room.find(room_id)
-    @chats = @room.chats
+    # room_id = @chat.room_id
+    # @room = Room.find(room_id)
+    # @chats = @room.chats
+
+    @chats = Chat.where(room_id: @chat.room_id)
+
 
     else
       flash[:alert] = "メッセージ送信に失敗しました。"

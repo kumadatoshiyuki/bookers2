@@ -9,12 +9,24 @@ class RoomsController < ApplicationController
   end
 
   def show
+    # ①パラムスIDからRoomデータを取得する。
     @room = Room.find(params[:id])
+    # もしも
+    # ユーザールームの
+    # user_idのカラムより、ログインしているユーザのIDと、
+    # room_idのカラムより、①のIDから
+    # 検索し値を取得する。
+    # 存在すれば
     if UserRoom.where(user_id: current_user.id,room_id: @room.id).present?
+      # 存在した場合
+      # @chatsの中に①のチャット
       @chats = @room.chats
+      # @chatは新しい空のお弁当箱
       @chat = Chat.new
+      # @user_roomsの中に①とユーザールームが入っている。
       @user_rooms = @room.user_rooms
     else
+      # 存在しない場合
       redirect_back(fallback_location: root_path)
     end
   end

@@ -6,6 +6,7 @@
             <div class="chat-face">
               <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, class: "pull-left profile-thumb", fallback: "no-image-icon.jpg"%>
             </div>
+            <span><%= m.user.name %></span>
             <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
               <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
             </div>
