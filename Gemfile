@@ -70,3 +70,5 @@ gem "refile-mini_magick"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'  # ＃jquery起動用
 gem 'jp_prefecture'  # 住所取得用
+
+gem 'whenever', require: false
