@@ -41,11 +41,14 @@ require File.expand_path(File.dirname(__FILE__) + "/environment")
 rails_env = Rails.env.to_sym
 set :environment, rails_env
 set :output, 'log/cron.log'
-every 30.minute do
+every 1.days, at: '9:00 am' do
   begin
-    runner "Batch::DataReset.data_reset"
+    runner "Batch::DataReset.daily_mail"
   rescue => e
     Rails.logger.error("aborted rails runner")
     raise e
   end
 end
+
+
+# Learn more: http://github.com/javan/whenever
